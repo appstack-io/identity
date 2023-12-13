@@ -1,1 +1,1 @@
-# @appstack-io
+# @appstack-io/identity

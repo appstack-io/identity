@@ -1,5 +1,5 @@
 {
-  "name": "@appstack-io",
+  "name": "@appstack-io/identity",
   "version": "0.0.1",
   "description": "",
   "author": {
@@ -8,7 +8,7 @@
   },
   "private": false,
   "license": "GPL-3.0",
-  "repository": "https://github.com/appstack-io",
+  "repository": "https://github.com/appstack-io/identity.git",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
