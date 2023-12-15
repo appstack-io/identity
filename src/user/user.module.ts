@@ -4,9 +4,10 @@ import { UserController } from './user.controller';
 import { UserLogic } from './user.logic';
 import { ArangodbModule } from '@appstack-io/arangodb';
 import { LimitsModule } from '@appstack-io/limits';
+import { PermissionModule } from '@appstack-io/permissions';
 
 @Module({
-  imports: [LimitsModule, ArangodbModule],
+  imports: [PermissionModule, LimitsModule, ArangodbModule],
   controllers: [UserController],
   providers: [UserService, UserLogic],
 })

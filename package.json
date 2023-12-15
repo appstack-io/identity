@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@appstack-io/arangodb": "^0.6.5",
-    "@appstack-io/authnz": "^0.1.1",
-    "@appstack-io/client": "^0.1.4",
+    "@appstack-io/authnz": "^0.1.2",
     "@appstack-io/exceptions": "^0.1.2",
+    "@appstack-io/permissions": "^0.2.2",
     "@appstack-io/limits": "^0.0.4",
     "@nestjs/common": "^10.2.10",
     "@nestjs/jwt": "^10.2.0",
@@ -42,7 +42,6 @@
   },
   "devDependencies": {
     "@appstack-io/main": "^0.0.11",
-    "@appstack-io/permissions": "^0.0.5",
     "@appstack-io/proto": "^0.0.7",
     "@appstack-io/tests": "^0.0.3",
     "@babel/generator": "^7.23.0",

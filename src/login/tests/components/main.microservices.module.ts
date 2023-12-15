@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { PermissionModule } from '@appstack-io/permissions';
 import { LoginModule } from '../../login.module';
 import { UserModule } from '../../../user/user.module';
 
-const imports = [PermissionModule, LoginModule, UserModule];
+const imports = [LoginModule, UserModule];
 
 export { imports };
 

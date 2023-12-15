@@ -8,28 +8,18 @@ import {
   UserUpdateOneInput,
 } from '../combined.interfaces';
 import { UserService } from './user.service';
-import {
-  ClientService,
-  PermissionServiceClient,
-  PermissionServiceDefinition,
-} from '@appstack-io/client';
+import { PermissionLogic } from '@appstack-io/permissions/dist/permission.logic';
 
 @Injectable()
 export class UserLogic {
-  private permissionServiceClient: PermissionServiceClient;
-
   constructor(
     private service: UserService,
-    private clientService: ClientService,
-  ) {
-    this.permissionServiceClient = this.clientService.getServiceInternalClient(
-      PermissionServiceDefinition,
-    );
-  }
+    private permissions: PermissionLogic,
+  ) {}
 
   async createOne(input: Partial<UserCreateOneInput>): Promise<User> {
     const created = await this.service.createOne(input);
-    await this.permissionServiceClient.createOne({
+    await this.permissions.createOne({
       permittedEntityId: created.id,
       permittedEntity: 'user',
       entity: 'user',

@@ -14,12 +14,14 @@ import { StrategyService } from './strategies/strategy.service';
 import { GoogleStrategy } from './strategies/google/google.strategy';
 import { GoogleController } from './strategies/google/google.controller';
 import * as process from 'process';
+import { PermissionModule } from '@appstack-io/permissions';
 
 @Module({
   imports: [
     LoginModule,
     UserModule,
     PassportModule,
+    PermissionModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: process.env.JWT_EXPIRY },
