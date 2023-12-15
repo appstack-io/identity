@@ -4,9 +4,10 @@ import { LoginController } from './login.controller';
 import { LoginLogic } from './login.logic';
 import { LimitsModule } from '@appstack-io/limits';
 import { ArangodbModule } from '@appstack-io/arangodb';
+import { PermissionModule } from '@appstack-io/permissions';
 
 @Module({
-  imports: [LimitsModule, ArangodbModule],
+  imports: [PermissionModule, LimitsModule, ArangodbModule],
   controllers: [LoginController],
   providers: [LoginService, LoginLogic],
   exports: [LoginService],

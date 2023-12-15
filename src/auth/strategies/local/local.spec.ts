@@ -6,7 +6,7 @@ import {
   LoginServiceDefinition,
   UserServiceClient,
   UserServiceDefinition,
-} from '@appstack-io/client';
+} from '../../../tests/combined.client';
 import { isE2E, runMain, useHost, usePorts } from '@appstack-io/tests';
 import { MainMicroservicesModule } from './tests/components/main.microservices.module';
 import { MainHttpModule } from './tests/components/main.http.module';

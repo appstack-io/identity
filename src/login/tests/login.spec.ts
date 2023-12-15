@@ -2,7 +2,7 @@ import { createChannel, createClient, Metadata } from 'nice-grpc';
 import {
   LoginServiceClient,
   LoginServiceDefinition,
-} from '@appstack-io/client';
+} from '../../tests/combined.client';
 import { shutdownComponents } from '@appstack-io/main';
 import { v4 as uuid } from 'uuid';
 import { LoginCreateOneInput } from '../../combined.interfaces';

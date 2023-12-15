@@ -1,5 +1,8 @@
 import { createChannel, createClient, Metadata } from 'nice-grpc';
-import { UserServiceClient, UserServiceDefinition } from '@appstack-io/client';
+import {
+  UserServiceClient,
+  UserServiceDefinition,
+} from '../../tests/combined.client';
 import { shutdownComponents } from '@appstack-io/main';
 import { v4 as uuid } from 'uuid';
 import {

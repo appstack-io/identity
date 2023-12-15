@@ -22,7 +22,17 @@ exec(
       `${__dirname}/src/combined.interfaces.ts`,
     );
     exec(
-      `node_modules/.bin/grpc_tools_node_protoc --plugin=protoc-gen-ts_proto=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./src --ts_proto_opt=outputServices=nice-grpc,outputServices=generic-definitions,useExactTypes=false --proto_path=. src/combined.proto`,
+      `node_modules/.bin/grpc_tools_node_protoc --plugin=protoc-gen-ts_proto=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./src --ts_proto_opt=outputServices=nice-grpc,outputServices=generic-definitions,useExactTypes=false --proto_path=. src/combined.proto && mv ./src/src/combined.ts ./src/tests/combined.client.ts && rm -rf ./src/src`,
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Execution error: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+          console.error(`Error: ${stderr}`);
+          return;
+        }
+      },
     );
   },
 );
