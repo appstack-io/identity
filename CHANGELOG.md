@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.0.4 - 2023-12-15
+#### Bug Fixes
+- permissions as lib - (86394ca) - orgal
+- permissions as lib - (2bfbd14) - orgal
+#### Miscellaneous Chores
+- bump version to 0.0.3 - (3b07739) - GitHub Action
+- - -
+
 ## 0.0.3 - 2023-12-13
 #### Bug Fixes
 - add secrets for test - (26cc490) - orgal
