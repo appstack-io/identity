@@ -1,8 +1,5 @@
-import { createChannel, createClient, Metadata } from 'nice-grpc';
-import {
-  UserServiceClient,
-  UserServiceDefinition,
-} from '../../tests/combined.client';
+import { Metadata, UserService } from '../../client';
+
 import { shutdownComponents } from '@appstack-io/main';
 import { v4 as uuid } from 'uuid';
 import {
@@ -10,15 +7,14 @@ import {
   login,
   runMain,
   setupArangoDb,
-  useHost,
   usePorts,
 } from '@appstack-io/tests';
 import { MainMicroservicesModule } from './components/main.microservices.module';
 import { MainHttpModule } from './components/main.http.module';
 
 describe('User', () => {
-  let client: UserServiceClient;
-  let clientInternal: UserServiceClient;
+  let client: UserService;
+  let clientInternal: UserService;
   let ports: {
     protoInternal: number;
     proto: number;
@@ -31,11 +27,8 @@ describe('User', () => {
   beforeAll(async () => {
     await setupArangoDb();
     ports = await usePorts();
-    const host = useHost();
-    const channel = createChannel(`${host}:${ports.proto}`);
-    const channelInternal = createChannel(`${host}:${ports.protoInternal}`);
-    client = createClient(UserServiceDefinition, channel);
-    clientInternal = createClient(UserServiceDefinition, channelInternal);
+    client = new UserService({ port: `${ports.proto}` });
+    clientInternal = new UserService({ port: `${ports.protoInternal}` });
     if (!isE2E())
       await runMain({
         publicMicroservicesModule: MainMicroservicesModule,
@@ -59,14 +52,14 @@ describe('User', () => {
 
     // Act + Assert
     await expect(
-      client.updateOne({ id: userId, ...update }, { metadata }),
+      client.updateOne({ id: userId, ...update }, metadata),
     ).resolves.toBeDefined();
     await expect(
-      client.findOne({ id: userId }, { metadata }),
+      client.findOne({ id: userId }, metadata),
     ).resolves.toBeDefined();
-    await expect(
-      client.removeOne({ id: userId }, { metadata }),
-    ).rejects.toThrow('permission denied');
+    await expect(client.removeOne({ id: userId }, metadata)).rejects.toThrow(
+      'permission denied',
+    );
   });
 
   test('CreateOne + FindOne', async () => {
@@ -88,7 +81,7 @@ describe('User', () => {
     metadata.set('jwt', accessToken);
 
     // Act
-    const found = await client.findMe({}, { metadata });
+    const found = await client.findMe({}, metadata);
 
     // Assert
     expect(found.id).toEqual(userId);
@@ -135,11 +128,11 @@ describe('User', () => {
     // Act
     const all = await clientInternal.search({
       filter: { name: token },
-      opts: { limit: 10, waitForSync: true },
+      opts: { limit: 10, offset: 0, waitForSync: true },
     });
     const page1 = await clientInternal.search({
       filter: { name: token },
-      opts: { limit: 3, waitForSync: true },
+      opts: { limit: 3, offset: 0, waitForSync: true },
     });
     const lastOffset = page1.meta.offset;
     const page2 = await clientInternal.search({

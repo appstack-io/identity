@@ -61,59 +61,37 @@ export interface LoginUpdateOneInput {
 export interface LoginRemoveOneInput {
   id: string;
 }
-  import { postToUnary, postToUnaryPublic } from './utils';
+  import { postToUnary } from './utils';
   import { Metadata } from 'nice-grpc';
  
   export class LoginService {
     private readonly serviceName: string = "LoginService";
     
+    constructor(private opts?: {port?: string, host?: string}){}
+    
     
     async createOne(data: Partial<LoginCreateOneInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnary<Login>(this.serviceName, 'createOne', data, metadata);
-    }
-    
-    async createOnePublic(data: Partial<LoginCreateOneInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnaryPublic<Login>(this.serviceName, 'createOne', data, metadata);
+      return postToUnary<Login>(this.serviceName, 'createOne', data, metadata, this.opts);
     }
   
     async findOne(data: Partial<LoginFindOneInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnary<Login>(this.serviceName, 'findOne', data, metadata);
-    }
-    
-    async findOnePublic(data: Partial<LoginFindOneInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnaryPublic<Login>(this.serviceName, 'findOne', data, metadata);
+      return postToUnary<Login>(this.serviceName, 'findOne', data, metadata, this.opts);
     }
   
     async findWhere(data: Partial<LoginFindWhereInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnary<Login>(this.serviceName, 'findWhere', data, metadata);
-    }
-    
-    async findWherePublic(data: Partial<LoginFindWhereInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnaryPublic<Login>(this.serviceName, 'findWhere', data, metadata);
+      return postToUnary<Login>(this.serviceName, 'findWhere', data, metadata, this.opts);
     }
   
     async findByPlatformId(data: Partial<LoginFindByPlatformIdInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnary<Login>(this.serviceName, 'findByPlatformId', data, metadata);
-    }
-    
-    async findByPlatformIdPublic(data: Partial<LoginFindByPlatformIdInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnaryPublic<Login>(this.serviceName, 'findByPlatformId', data, metadata);
+      return postToUnary<Login>(this.serviceName, 'findByPlatformId', data, metadata, this.opts);
     }
   
     async updateOne(data: Partial<LoginUpdateOneInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnary<Login>(this.serviceName, 'updateOne', data, metadata);
-    }
-    
-    async updateOnePublic(data: Partial<LoginUpdateOneInput>, metadata: Metadata=new Metadata()): Promise<Login> {
-      return postToUnaryPublic<Login>(this.serviceName, 'updateOne', data, metadata);
+      return postToUnary<Login>(this.serviceName, 'updateOne', data, metadata, this.opts);
     }
   
     async removeOne(data: Partial<LoginRemoveOneInput>, metadata: Metadata=new Metadata()): Promise<Empty> {
-      return postToUnary<Empty>(this.serviceName, 'removeOne', data, metadata);
-    }
-    
-    async removeOnePublic(data: Partial<LoginRemoveOneInput>, metadata: Metadata=new Metadata()): Promise<Empty> {
-      return postToUnaryPublic<Empty>(this.serviceName, 'removeOne', data, metadata);
+      return postToUnary<Empty>(this.serviceName, 'removeOne', data, metadata, this.opts);
     }
   
   }

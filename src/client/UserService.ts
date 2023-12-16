@@ -60,59 +60,37 @@ export interface UserSearchResult {
 export interface UserSearchResultMeta {
   offset: number;
 }
-  import { postToUnary, postToUnaryPublic } from './utils';
+  import { postToUnary } from './utils';
   import { Metadata } from 'nice-grpc';
  
   export class UserService {
     private readonly serviceName: string = "UserService";
     
+    constructor(private opts?: {port?: string, host?: string}){}
+    
     
     async createOne(data: Partial<UserCreateOneInput>, metadata: Metadata=new Metadata()): Promise<User> {
-      return postToUnary<User>(this.serviceName, 'createOne', data, metadata);
-    }
-    
-    async createOnePublic(data: Partial<UserCreateOneInput>, metadata: Metadata=new Metadata()): Promise<User> {
-      return postToUnaryPublic<User>(this.serviceName, 'createOne', data, metadata);
+      return postToUnary<User>(this.serviceName, 'createOne', data, metadata, this.opts);
     }
   
     async updateOne(data: Partial<UserUpdateOneInput>, metadata: Metadata=new Metadata()): Promise<User> {
-      return postToUnary<User>(this.serviceName, 'updateOne', data, metadata);
-    }
-    
-    async updateOnePublic(data: Partial<UserUpdateOneInput>, metadata: Metadata=new Metadata()): Promise<User> {
-      return postToUnaryPublic<User>(this.serviceName, 'updateOne', data, metadata);
+      return postToUnary<User>(this.serviceName, 'updateOne', data, metadata, this.opts);
     }
   
     async findOne(data: Partial<UserFindOneInput>, metadata: Metadata=new Metadata()): Promise<User> {
-      return postToUnary<User>(this.serviceName, 'findOne', data, metadata);
-    }
-    
-    async findOnePublic(data: Partial<UserFindOneInput>, metadata: Metadata=new Metadata()): Promise<User> {
-      return postToUnaryPublic<User>(this.serviceName, 'findOne', data, metadata);
+      return postToUnary<User>(this.serviceName, 'findOne', data, metadata, this.opts);
     }
   
     async findMe(data: Partial<Empty>, metadata: Metadata=new Metadata()): Promise<User> {
-      return postToUnary<User>(this.serviceName, 'findMe', data, metadata);
-    }
-    
-    async findMePublic(data: Partial<Empty>, metadata: Metadata=new Metadata()): Promise<User> {
-      return postToUnaryPublic<User>(this.serviceName, 'findMe', data, metadata);
+      return postToUnary<User>(this.serviceName, 'findMe', data, metadata, this.opts);
     }
   
     async removeOne(data: Partial<UserRemoveOneInput>, metadata: Metadata=new Metadata()): Promise<Empty> {
-      return postToUnary<Empty>(this.serviceName, 'removeOne', data, metadata);
-    }
-    
-    async removeOnePublic(data: Partial<UserRemoveOneInput>, metadata: Metadata=new Metadata()): Promise<Empty> {
-      return postToUnaryPublic<Empty>(this.serviceName, 'removeOne', data, metadata);
+      return postToUnary<Empty>(this.serviceName, 'removeOne', data, metadata, this.opts);
     }
   
     async search(data: Partial<UserSearchInput>, metadata: Metadata=new Metadata()): Promise<UserSearchResult> {
-      return postToUnary<UserSearchResult>(this.serviceName, 'search', data, metadata);
-    }
-    
-    async searchPublic(data: Partial<UserSearchInput>, metadata: Metadata=new Metadata()): Promise<UserSearchResult> {
-      return postToUnaryPublic<UserSearchResult>(this.serviceName, 'search', data, metadata);
+      return postToUnary<UserSearchResult>(this.serviceName, 'search', data, metadata, this.opts);
     }
   
   }

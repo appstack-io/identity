@@ -1,8 +1,4 @@
-import { createChannel, createClient, Metadata } from 'nice-grpc';
-import {
-  LoginServiceClient,
-  LoginServiceDefinition,
-} from '../../tests/combined.client';
+import { LoginService, Metadata } from '../../client';
 import { shutdownComponents } from '@appstack-io/main';
 import { v4 as uuid } from 'uuid';
 import { LoginCreateOneInput } from '../../combined.interfaces';
@@ -11,22 +7,19 @@ import {
   login,
   runMain,
   setupArangoDb,
-  useHost,
   usePorts,
 } from '@appstack-io/tests';
 import { MainMicroservicesModule } from './components/main.microservices.module';
 import { MainHttpModule } from './components/main.http.module';
 
 describe('Login', () => {
-  let client: LoginServiceClient;
+  let client: LoginService;
   const metadata = new Metadata();
 
   beforeAll(async () => {
     await setupArangoDb();
     const ports = await usePorts();
-    const host = useHost();
-    const channel = createChannel(`${host}:${ports.proto}`);
-    client = createClient(LoginServiceDefinition, channel);
+    client = new LoginService({ port: `${ports.proto}` });
     if (!isE2E())
       await runMain({
         publicMicroservicesModule: MainMicroservicesModule,
@@ -52,8 +45,8 @@ describe('Login', () => {
     };
 
     // Act
-    const created = await client.createOne(input, { metadata });
-    const found = await client.findWhere(input, { metadata });
+    const created = await client.createOne(input, metadata);
+    const found = await client.findWhere(input, metadata);
 
     // Assert
     expect(found).toEqual(created);
@@ -67,10 +60,10 @@ describe('Login', () => {
       platformLoginSecret: uuid(),
       credentials: { local: { username: uuid(), password: uuid() } },
     };
-    const created = await client.createOne(input, { metadata });
+    const created = await client.createOne(input, metadata);
 
     // Act
-    const found = await client.findByPlatformId(input, { metadata });
+    const found = await client.findByPlatformId(input, metadata);
 
     // Assert
     expect(found).toEqual(created);
@@ -90,12 +83,12 @@ describe('Login', () => {
       platformLoginSecret: uuid(),
       credentials: { local: { username: uuid(), password: uuid() } },
     };
-    const created = await client.createOne(input, { metadata });
+    const created = await client.createOne(input, metadata);
 
     // Act
     const updated = await client.updateOne(
       { id: created.id, ...update },
-      { metadata },
+      metadata,
     );
 
     // Assert
@@ -110,13 +103,13 @@ describe('Login', () => {
       platformLoginSecret: uuid(),
       credentials: { local: { username: uuid(), password: uuid() } },
     };
-    const created = await client.createOne(input, { metadata });
+    const created = await client.createOne(input, metadata);
 
     // Act
-    await client.removeOne({ id: created.id }, { metadata });
+    await client.removeOne({ id: created.id }, metadata);
 
     // Assert
-    await expect(client.findWhere(input, { metadata })).rejects.toThrow(
+    await expect(client.findWhere(input, metadata)).rejects.toThrow(
       'not found',
     );
   });
