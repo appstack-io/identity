@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.0.5 - 2023-12-16
+#### Bug Fixes
+- generating client - (0f5b9a5) - orgal
+- generating client - (ee377eb) - orgal
+#### Miscellaneous Chores
+- bump version to 0.0.4 - (9bf033c) - GitHub Action
+- - -
+
 ## 0.0.4 - 2023-12-15
 #### Bug Fixes
 - permissions as lib - (86394ca) - orgal
