@@ -46,7 +46,10 @@ jobs:
           echo "ASIO_SESSION_SECRET=${{ secrets.ASIO_SESSION_SECRET }}" >> $GITHUB_ENV
 
       - name: Run Tests
-        run: npm run build && npm test
+        run: |
+          echo "127.0.0.1 user" | sudo tee -a /etc/hosts
+          echo "127.0.0.1 login" | sudo tee -a /etc/hosts
+          npm run build && npm test
 
       - name: Semver release
         if: github.ref == 'refs/heads/main'
