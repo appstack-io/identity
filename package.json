@@ -19,6 +19,7 @@
   "scripts": {
     "build": "nest build && rm -rf dist/tests",
     "generate-interfaces": "ts-node generate-interfaces.ts",
+    "proto:generate-client": "ts-node generate-grpc-client.ts && node generate-client.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest -i",
     "test:e2e": "E2E=1 SERVICE_HOST=service jest --runInBand"
