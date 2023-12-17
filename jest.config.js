@@ -15,7 +15,7 @@ module.exports = {
     'lcov',
     'text',
   ],
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.spec.ts',
