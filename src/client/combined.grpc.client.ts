@@ -1,7 +1,7 @@
 /* eslint-disable */
 import type { CallContext, CallOptions } from "nice-grpc-common";
 import * as _m0 from "protobufjs/minimal";
-import { Empty } from "../google/protobuf/empty";
+import { Empty } from "./google//protobuf/empty";
 import Long = require("long");
 
 export const protobufPackage = "main";
