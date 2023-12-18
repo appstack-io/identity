@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.0.6 - 2023-12-17
+#### Bug Fixes
+- using proto-build.ts - (fb70924) - orgal
+- using proto-build.ts - (2aa7a67) - orgal
+- using proto-build.ts - (336e06c) - orgal
+- using proto-build.ts - (e1dff99) - orgal
+- using proto-build.ts - (9f1da4f) - orgal
+#### Miscellaneous Chores
+- bump version to 0.0.5 - (357aa07) - GitHub Action
+- - -
+
 ## 0.0.5 - 2023-12-16
 #### Bug Fixes
 - generating client - (0f5b9a5) - orgal
